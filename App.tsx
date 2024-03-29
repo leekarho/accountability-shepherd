@@ -36,7 +36,20 @@ import Testing from "./components/Testing";
 // });
 // }
 
+
 export default function App() {
+
+  // async function openDatabase(pathToDatabaseFile: string): Promise<SQLite.WebSQLDatabase> {
+  //   if (!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + 'SQLite')).exists) {
+  //     await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'SQLite');
+  //   }
+  //   await FileSystem.downloadAsync(
+  //     Asset.fromModule(require(pathToDatabaseFile)).uri,
+  //     FileSystem.documentDirectory + 'SQLite/shepherd.db'
+  //   );
+  //   return SQLite.openDatabase('shepherd.db');
+  // }
+
   // const db = useSQLiteContext()
   // const dbAsset = require("./assets/shepherd.db");
   // const db = dbAsset;
@@ -81,7 +94,7 @@ export default function App() {
     database.transaction((tx: any) => {
       const result = tx.executeSql(
         `CREATE TABLE IF NOT EXISTS Sheep (
-          sheep_id INTEGER PRIMARY KEY,
+          sheep_id INTEGER PRIMARY KEY AUTOINCREMENT,
           name VARCHAR(50),
           description VARCHAR(50),
           personality VARCHAR(50),
@@ -99,7 +112,7 @@ export default function App() {
     }, readOnly);
   }
 
-  const db = SQLite.openDatabase("shepherd.db");
+  const db = SQLite.openDatabase("shepherd1.db");
 
   useEffect(() => {
     // createTable(db).then(() => {
@@ -121,7 +134,7 @@ export default function App() {
 
   return (
     <>
-      <SQLiteProvider databaseName="shepherd.db">
+      <SQLiteProvider databaseName="shepherd1.db">
         <View style={styles.container}>
           <Text>Hello world</Text>
           <Testing />

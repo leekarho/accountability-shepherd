@@ -8,9 +8,9 @@ export default function Testing() {
   const setGoals = async () => {
     db.withTransactionAsync(async () => {
       await db.runAsync(
-        `INSERT INTO Sheep (name, description) VALUES (?, ?)
+        `INSERT INTO Sheep (name, description) VALUES ( ?, ?)
             `,
-        ["babaa", "Pass interview at Wiley Edge"]
+        ["zaza", "Get a job"]
       );
       console.log("sheep added");
     });
@@ -18,7 +18,8 @@ export default function Testing() {
 
   const deleteSheep = async () => {
     db.withTransactionAsync(async () => {
-      await db.runAsync(`DELETE FROM Sheep where sheep_id = ?`, [4]);
+      await db.runAsync(`DELETE FROM Sheep where name = ?`, ["zaza"]);
+      console.log("sheep deleted");
     });
   };
 
@@ -53,11 +54,16 @@ export default function Testing() {
     }
   };
 
+  const dropDB = (db: any) => {
+     db.deleteDatabase("shepherd.db");
+  }
+
   return (
     <View>
       <Button title="getsheep" onPress={() => getSheep(db)} />
       <Button title="goals" onPress={setGoals} />
       <Button title="delete" onPress={deleteSheep} />
+      <Button title="dropDB" onPress={dropDB} />
     </View>
   );
 }
