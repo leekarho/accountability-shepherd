@@ -36,9 +36,7 @@ import Testing from "./components/Testing";
 // });
 // }
 
-
 export default function App() {
-
   // async function openDatabase(pathToDatabaseFile: string): Promise<SQLite.WebSQLDatabase> {
   //   if (!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + 'SQLite')).exists) {
   //     await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'SQLite');
@@ -94,7 +92,7 @@ export default function App() {
     database.transaction((tx: any) => {
       const result = tx.executeSql(
         `CREATE TABLE IF NOT EXISTS Sheep (
-          sheep_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          sheep_id INTEGER PRIMARY KEY,
           name VARCHAR(50),
           description VARCHAR(50),
           personality VARCHAR(50),
@@ -104,7 +102,8 @@ export default function App() {
           frequency INT,
           health_timer INT,
           days_since_fed DATE,
-          death_date DATE
+          death_date DATE,
+          new_field TEXT
       );`
       );
       // console.log("Count:", result.rows[0]["COUNT(*)"])

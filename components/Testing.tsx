@@ -54,9 +54,12 @@ export default function Testing() {
     }
   };
 
-  const dropDB = (db: any) => {
-     db.deleteDatabase("shepherd.db");
-  }
+  const dropDB = async () => {
+    db.withTransactionAsync(async () => {
+      await db.runAsync(`DROP TABLE Sheep`, []);
+      console.log("table dropped");
+    });
+  };
 
   return (
     <View>
